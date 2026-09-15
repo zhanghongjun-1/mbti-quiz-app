@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBTI 性格测评</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">MBTI 测评</a>
+    <div class="nav-links">
+      <a href="index.html">测评</a>
+      <a href="analytics.html">汇总分析</a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- ========== 欢迎页 ========== -->
+    <section id="welcome-section" class="welcome-card">
+      <h1>MBTI 性格测评</h1>
+      <p class="subtitle">28 道题，了解你的性格类型</p>
+      <div class="features">
+        <div class="feature-item">
+          <div class="num">28</div>
+          <div class="label">道精选题目</div>
+        </div>
+        <div class="feature-item">
+          <div class="num">4</div>
+          <div class="label">大性格维度</div>
+        </div>
+        <div class="feature-item">
+          <div class="num">16</div>
+          <div class="label">种性格类型</div>
+        </div>
+        <div class="feature-item">
+          <div class="num">~5</div>
+          <div class="label">分钟完成</div>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="startQuiz()">开始测评</button>
+    </section>
+
+    <!-- ========== 答题页 ========== -->
+    <section id="quiz-section" class="quiz-section">
+      <div class="progress-bar">
+        <div class="fill" id="progress-fill" style="width: 0%"></div>
+      </div>
+      <div class="question-meta">
+        <span id="question-index">第 1 / 28 题</span>
+        <span id="dimension-label">E/I 外向/内向</span>
+      </div>
+      <div class="question-card">
+        <div class="q-text" id="question-text">题目加载中...</div>
+        <div class="option-group">
+          <button class="option-btn" onclick="selectOption('A')">
+            <span class="marker">A</span>
+            <span id="option-a-text">选项 A</span>
+          </button>
+          <button class="option-btn" onclick="selectOption('B')">
+            <span class="marker">B</span>
+            <span id="option-b-text">选项 B</span>
+          </button>
+        </div>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn btn-outline btn-sm" id="prev-btn" onclick="prevQuestion()">上一题</button>
+        <button class="btn btn-primary btn-sm" id="next-btn" onclick="nextQuestion()" disabled>下一题</button>
+      </div>
+    </section>
+
+    <!-- ========== 结果页 ========== -->
+    <section id="result-section" class="result-section">
+      <div class="result-header">
+        <div class="result-type-code" id="result-code">INTJ</div>
+        <div class="result-type-name" id="result-name">建筑师</div>
+        <div class="result-nickname" id="result-nickname">The Architect</div>
+        <div class="result-group-tag" id="result-group">NT 理性者</div>
+      </div>
+
+      <!-- 维度百分比 -->
+      <div class="dimension-bars">
+        <h3>维度倾向</h3>
+        <div id="dim-bars-container"></div>
+      </div>
+
+      <!-- 性格描述 -->
+      <div class="report-card">
+        <h3>性格概述</h3>
+        <p class="description" id="result-description"></p>
+      </div>
+
+      <!-- 优势 -->
+      <div class="report-card">
+        <h3>优势</h3>
+        <ul id="result-strengths"></ul>
+      </div>
+
+      <!-- 劣势 -->
+      <div class="report-card">
+        <h3>劣势</h3>
+        <ul id="result-weaknesses"></ul>
+      </div>
+
+      <!-- 代表人物 -->
+      <div class="report-card">
+        <h3>代表人物</h3>
+        <div class="tag-list" id="result-celebrities"></div>
+      </div>
+
+      <!-- 职业建议 -->
+      <div class="report-card">
+        <h3>职业建议</h3>
+        <div class="tag-list" id="result-careers"></div>
+      </div>
+
+      <!-- 导出按钮 -->
+      <div class="export-buttons">
+        <button class="btn btn-outline btn-sm" onclick="exportJSON()">导出 JSON</button>
+        <button class="btn btn-outline btn-sm" onclick="exportText()">导出文本</button>
+        <button class="btn btn-outline btn-sm" onclick="exportImage()">导出图片</button>
+        <button class="btn btn-primary btn-sm" onclick="restartQuiz()">重新测评</button>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- 数据文件 & 脚本 -->
+  <script src="data/questions.js"></script>
+  <script src="data/types.js"></script>
+  <script src="js/export.js"></script>
+  <script src="js/quiz.js"></script>
+</body>
+</html>
