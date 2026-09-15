@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBTI 汇总分析</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">MBTI 测评</a>
+    <div class="nav-links">
+      <a href="index.html">测评</a>
+      <a href="analytics.html">汇总分析</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <section class="analytics-section">
+      <h2>多人汇总分析</h2>
+      <p class="subtitle">导入多人导出的 JSON 结果文件，查看群体性格分布统计</p>
+
+      <!-- 上传区 -->
+      <div class="upload-area" id="upload-area">
+        <div class="upload-icon">📁</div>
+        <p><strong>点击选择文件</strong> 或将 JSON 文件拖拽到此处</p>
+        <p style="font-size: 13px;">支持同时导入多个文件</p>
+        <input type="file" id="file-input" multiple accept=".json" style="display:none;">
+      </div>
+
+      <!-- 分析结果区 -->
+      <div class="analytics-result" id="analytics-result" style="display:none;">
+        <!-- 统计概览 -->
+        <div class="stat-grid" id="stat-grid"></div>
+
+        <!-- 类型分布表 -->
+        <h3 style="margin-bottom: 12px;">类型分布</h3>
+        <table class="dist-table" id="dist-table">
+          <thead>
+            <tr>
+              <th>类型</th>
+              <th>名称</th>
+              <th>人数</th>
+              <th>占比</th>
+              <th class="bar-cell">分布</th>
+            </tr>
+          </thead>
+          <tbody id="dist-tbody"></tbody>
+        </table>
+
+        <!-- 维度分布 -->
+        <h3 style="margin: 32px 0 12px;">维度分布</h3>
+        <table class="dist-table" id="dim-table">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>倾向</th>
+              <th>人数</th>
+              <th>占比</th>
+              <th class="bar-cell">分布</th>
+            </tr>
+          </thead>
+          <tbody id="dim-tbody"></tbody>
+        </table>
+
+        <!-- 清空按钮 -->
+        <div style="text-align: center; margin-top: 32px;">
+          <button class="btn btn-outline btn-sm" onclick="clearData()">清空数据</button>
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+  <script src="data/types.js"></script>
+  <script src="js/analytics.js"></script>
+</body>
+</html>
