@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBTI 性格测评程序</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            width: 90%;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        .header h1 { font-size: 2.4em; margin-bottom: 10px; }
+        .header p { font-size: 1.1em; opacity: 0.9; }
+        .cards {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+        .card {
+            border: 2px solid #f0f0f0;
+            border-radius: 16px;
+            padding: 30px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card:hover {
+            border-color: #667eea;
+            box-shadow: 0 8px 24px rgba(102,126,234,0.2);
+            transform: translateY(-4px);
+        }
+        .card-icon {
+            font-size: 2.5em;
+            margin-bottom: 16px;
+        }
+        .card h3 { font-size: 1.2em; margin-bottom: 8px; }
+        .card p { font-size: 0.9em; color: #666; line-height: 1.6; }
+        .card .badge {
+            margin-top: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 600;
+        }
+        .badge-full { background: #e8f5e9; color: #2e7d32; }
+        .badge-simple { background: #e3f2fd; color: #1565c0; }
+        .badge-proto { background: #fff3e0; color: #e65100; }
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: #999;
+            font-size: 0.85em;
+            border-top: 1px solid #f0f0f0;
+        }
+        @media (max-width: 600px) {
+            .header { padding: 40px 20px; }
+            .header h1 { font-size: 1.8em; }
+            .cards { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>MBTI 性格测评程序</h1>
+            <p>纯前端实现 | 零后端依赖 | 浏览器打开即用</p>
+        </div>
+        <div class="cards">
+            <a class="card" href="mbti-quiz/index.html">
+                <div class="card-icon">&#x1F9E0;</div>
+                <h3>快速测评（推荐）</h3>
+                <p>20 题精简版，中文界面，支持上一题/下一题切换、进度显示、四维度解读与免责声明</p>
+                <span class="badge badge-simple">单文件 | 20题</span>
+            </a>
+            <a class="card" href="mbti-app/index.html">
+                <div class="card-icon">&#x1F4CB;</div>
+                <h3>完整版测评</h3>
+                <p>28 题完整版，支持 JSON/文本/图片导出，含多人汇总分析页面，适合团队使用</p>
+                <span class="badge badge-full">完整版 | 28题 | 导出</span>
+            </a>
+            <a class="card" href="mbti-app/analytics.html">
+                <div class="card-icon">&#x1F4CA;</div>
+                <h3>多人汇总分析</h3>
+                <p>导入多人测评结果 JSON，自动统计团队 MBTI 类型分布与维度偏好</p>
+                <span class="badge badge-full">团队分析</span>
+            </a>
+            <a class="card" href="mbti-prototype/index.html">
+                <div class="card-icon">&#x1F4F1;</div>
+                <h3>交互原型</h3>
+                <p>手机外框展示，4 屏切换导航（欢迎/答题/结果/汇总），功能标注清晰</p>
+                <span class="badge badge-proto">原型展示</span>
+            </a>
+        </div>
+        <div class="footer">
+            MBTI 性格测评程序 &copy; 2026 | 纯前端单页应用 | 数据不会上传到任何服务器
+        </div>
+    </div>
+</body>
+</html>
