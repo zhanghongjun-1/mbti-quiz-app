@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBTI 性格测评 - 交互原型</title>
+  <link rel="stylesheet" href="css/prototype.css">
+</head>
+<body>
+
+  <!-- ========== 原型顶栏 ========== -->
+  <div class="proto-topbar">
+    <div class="proto-topbar-left">
+      <span class="proto-badge">PROTOTYPE</span>
+      <span class="proto-title">MBTI 性格测评程序 · 交互原型</span>
+    </div>
+    <div class="proto-screen-nav">
+      <button class="screen-nav-btn active" data-screen="welcome" onclick="switchScreen('welcome')">1. 欢迎页</button>
+      <button class="screen-nav-btn" data-screen="quiz" onclick="switchScreen('quiz')">2. 答题页</button>
+      <button class="screen-nav-btn" data-screen="result" onclick="switchScreen('result')">3. 结果页</button>
+      <button class="screen-nav-btn" data-screen="analytics" onclick="switchScreen('analytics')">4. 汇总分析页</button>
+    </div>
+    <div class="proto-topbar-right">
+      <span class="proto-version">V1.0 · 2026-09-15</span>
+    </div>
+  </div>
+
+  <!-- ========== 手机外框 ========== -->
+  <div class="phone-frame">
+    <div class="phone-notch"></div>
+    <div class="phone-screen" id="phone-screen">
+
+      <!-- ========== 屏幕1：欢迎页 ========== -->
+      <div class="screen active" id="screen-welcome">
+        <div class="app-navbar">
+          <span class="app-logo">MBTI 测评</span>
+          <div class="app-nav-links">
+            <span class="nav-link active">测评</span>
+            <span class="nav-link" onclick="switchScreen('analytics')">汇总分析</span>
+          </div>
+        </div>
+        <div class="screen-body">
+          <div class="welcome-card">
+            <div class="welcome-icon">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                <circle cx="32" cy="32" r="30" stroke="#6366f1" stroke-width="2" fill="#e0e7ff"/>
+                <text x="32" y="40" font-size="20" font-weight="700" fill="#6366f1" text-anchor="middle">MBTI</text>
+              </svg>
+            </div>
+            <h1>MBTI 性格测评</h1>
+            <p class="welcome-subtitle">28 道题，了解你的性格类型</p>
+            <div class="welcome-features">
+              <div class="feature-item">
+                <div class="feature-num">28</div>
+                <div class="feature-label">道精选题目</div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-num">4</div>
+                <div class="feature-label">大性格维度</div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-num">16</div>
+                <div class="feature-label">种性格类型</div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-num">~5</div>
+                <div class="feature-label">分钟完成</div>
+              </div>
+            </div>
+            <button class="btn btn-primary" onclick="switchScreen('quiz')">开始测评</button>
+          </div>
+        </div>
+        <div class="proto-annotation proto-anno-welcome">
+          <div class="anno-tag">F1 · 入口</div>
+          <div class="anno-text">用户进入后看到欢迎页，展示测评概况（题量/维度/类型/耗时），点击"开始测评"进入答题流程。</div>
+        </div>
+      </div>
+
+      <!-- ========== 屏幕2：答题页 ========== -->
+      <div class="screen" id="screen-quiz">
+        <div class="app-navbar">
+          <span class="app-logo">MBTI 测评</span>
+          <div class="app-nav-links">
+            <span class="nav-link active">测评</span>
+            <span class="nav-link" onclick="switchScreen('analytics')">汇总分析</span>
+          </div>
+        </div>
+        <div class="screen-body">
+          <div class="progress-bar">
+            <div class="progress-fill" id="proto-progress" style="width: 25%"></div>
+          </div>
+          <div class="question-meta">
+            <span id="proto-q-index">第 7 / 28 题</span>
+            <span id="proto-q-dim">S/N 实感/直觉</span>
+          </div>
+          <div class="question-card">
+            <div class="q-text" id="proto-q-text">读一本书时，你更喜欢：</div>
+            <div class="option-group" id="proto-options">
+              <button class="option-btn" onclick="selectProtoOption(this, 'A')">
+                <span class="marker">A</span>
+                <span>按部就班，从头到尾循序渐进地读</span>
+              </button>
+              <button class="option-btn" onclick="selectProtoOption(this, 'B')">
+                <span class="marker">B</span>
+                <span>先翻看目录和结论，跳着读感兴趣的部分</span>
+              </button>
+            </div>
+          </div>
+          <div class="quiz-nav">
+            <button class="btn btn-outline btn-sm" onclick="protoPrev()">上一题</button>
+            <button class="btn btn-primary btn-sm" id="proto-next-btn" onclick="protoNext()">下一题</button>
+          </div>
+        </div>
+        <div class="proto-annotation proto-anno-quiz">
+          <div class="anno-tag">F1+F3 · 答题交互</div>
+          <div class="anno-text">28题二选一强制选择。顶部进度条实时更新。选中选项高亮反馈。支持上一题/下一题导航。最后一题变为"查看结果"。</div>
+        </div>
+      </div>
+
+      <!-- ========== 屏幕3：结果页 ========== -->
+      <div class="screen" id="screen-result">
+        <div class="app-navbar">
+          <span class="app-logo">MBTI 测评</span>
+          <div class="app-nav-links">
+            <span class="nav-link active">测评</span>
+            <span class="nav-link" onclick="switchScreen('analytics')">汇总分析</span>
+          </div>
+        </div>
+        <div class="screen-body">
+          <div class="result-header">
+            <div class="result-type-code">INFP</div>
+            <div class="result-type-name">调停者</div>
+            <div class="result-nickname">The Mediator</div>
+            <div class="result-group-tag">NF 理想主义者</div>
+          </div>
+
+          <div class="dimension-bars">
+            <h3>维度倾向</h3>
+            <div class="dim-bar">
+              <div class="dim-bar-labels"><span class="left">E 14%</span><span class="right">I 86%</span></div>
+              <div class="dim-bar-track"><div class="dim-bar-fill" style="width: 14%"></div></div>
+            </div>
+            <div class="dim-bar">
+              <div class="dim-bar-labels"><span class="left">S 29%</span><span class="right">N 71%</span></div>
+              <div class="dim-bar-track"><div class="dim-bar-fill" style="width: 29%"></div></div>
+            </div>
+            <div class="dim-bar">
+              <div class="dim-bar-labels"><span class="left">T 14%</span><span class="right">F 86%</span></div>
+              <div class="dim-bar-track"><div class="dim-bar-fill" style="width: 14%"></div></div>
+            </div>
+            <div class="dim-bar">
+              <div class="dim-bar-labels"><span class="left">J 29%</span><span class="right">P 71%</span></div>
+              <div class="dim-bar-track"><div class="dim-bar-fill" style="width: 29%"></div></div>
+            </div>
+          </div>
+
+          <div class="report-card">
+            <h3>性格概述</h3>
+            <p class="description">诗意、善良的利他主义者，总是热情地为正当事业提供帮助。你内心丰富而敏感，追求真实和意义，对美好事物有天然的感知力。</p>
+          </div>
+
+          <div class="report-card">
+            <h3>优势</h3>
+            <ul class="report-list">
+              <li>富有同情心和同理心</li>
+              <li>创造力和想象力丰富</li>
+              <li>价值观坚定，忠于自我</li>
+              <li>善于发现人的潜能</li>
+              <li>谦逊而真诚</li>
+            </ul>
+          </div>
+
+          <div class="report-card">
+            <h3>劣势</h3>
+            <ul class="report-list weakness-list">
+              <li>容易自我怀疑和不安全</li>
+              <li>可能过于理想化</li>
+              <li>容易被批评伤害</li>
+              <li>拖延倾向</li>
+              <li>不喜欢冲突和对抗</li>
+            </ul>
+          </div>
+
+          <div class="report-card">
+            <h3>代表人物</h3>
+            <div class="tag-list">
+              <span class="tag">莎士比亚（William Shakespeare）</span>
+              <span class="tag">J.R.R.托尔金（J.R.R. Tolkien）</span>
+              <span class="tag">海伦·凯勒（Helen Keller）</span>
+            </div>
+          </div>
+
+          <div class="report-card">
+            <h3>职业建议</h3>
+            <div class="tag-list">
+              <span class="tag">作家/诗人</span>
+              <span class="tag">艺术家</span>
+              <span class="tag">心理咨询师</span>
+              <span class="tag">设计师</span>
+              <span class="tag">非营利工作者</span>
+            </div>
+          </div>
+
+          <div class="export-buttons">
+            <button class="btn btn-outline btn-sm" onclick="protoToast('已导出 JSON 文件')">导出 JSON</button>
+            <button class="btn btn-outline btn-sm" onclick="protoToast('已导出文本报告')">导出文本</button>
+            <button class="btn btn-outline btn-sm" onclick="protoToast('已导出图片')">导出图片</button>
+            <button class="btn btn-primary btn-sm" onclick="switchScreen('welcome')">重新测评</button>
+          </div>
+        </div>
+        <div class="proto-annotation proto-anno-result">
+          <div class="anno-tag">F2+F4+F5 · 结果展示</div>
+          <div class="anno-text">展示类型代码、维度百分比条形图、性格概述、优势/劣势列表、代表人物、职业建议。底部提供 JSON/文本/图片三种导出方式和重新测评入口。</div>
+        </div>
+      </div>
+
+      <!-- ========== 屏幕4：汇总分析页 ========== -->
+      <div class="screen" id="screen-analytics">
+        <div class="app-navbar">
+          <span class="app-logo">MBTI 测评</span>
+          <div class="app-nav-links">
+            <span class="nav-link" onclick="switchScreen('welcome')">测评</span>
+            <span class="nav-link active">汇总分析</span>
+          </div>
+        </div>
+        <div class="screen-body">
+          <div class="analytics-section">
+            <h2>多人汇总分析</h2>
+            <p class="analytics-subtitle">导入多人导出的 JSON 结果文件，查看群体性格分布统计</p>
+
+            <div class="upload-area" onclick="protoToast('点击选择文件（原型演示）')">
+              <div class="upload-icon">📁</div>
+              <p><strong>点击选择文件</strong> 或将 JSON 文件拖拽到此处</p>
+              <p class="upload-hint">支持同时导入多个文件</p>
+            </div>
+
+            <div class="analytics-result">
+              <div class="stat-grid">
+                <div class="stat-card">
+                  <div class="stat-num">12</div>
+                  <div class="stat-label">总人数</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-num">7</div>
+                  <div class="stat-label">类型数</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-num">INFP</div>
+                  <div class="stat-label">最常见类型</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-num">3</div>
+                  <div class="stat-label">该类型人数</div>
+                </div>
+              </div>
+
+              <h3 class="section-subheading">类型分布</h3>
+              <table class="dist-table">
+                <thead>
+                  <tr><th>类型</th><th>名称</th><th>人数</th><th>占比</th><th class="bar-cell">分布</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td class="type-code">INFP</td><td>调停者</td><td>3</td><td>25.0%</td><td class="bar-cell"><div class="mini-bar"><div class="mini-fill" style="width:100%"></div></div></td></tr>
+                  <tr><td class="type-code">INTJ</td><td>建筑师</td><td>2</td><td>16.7%</td><td class="bar-cell"><div class="mini-bar"><div class="mini-fill" style="width:67%"></div></div></td></tr>
+                  <tr><td class="type-code">ENFP</td><td>竞选者</td><td>2</td><td>16.7%</td><td class="bar-cell"><div class="mini-bar"><div class="mini-fill" style="width:67%"></div></div></td></tr>
+                  <tr><td class="type-code">ESTJ</td><td>总经理</td><td>1</td><td>8.3%</td><td class="bar-cell"><div class="mini-bar"><div class="mini-fill" style="width:33%"></div></div></td></tr>
+                  <tr><td class="type-code">ISTP</td><td>鉴赏家</td><td>1</td><td>8.3%</td><td class="bar-cell"><div class="mini-bar"><div class="mini-fill" style="width:33%"></div></div></td></tr>
+                  <tr><td class="type-code">ENFJ</td><td>主人公</td><td>1</td><td>8.3%</td><td class="bar-cell"><div class="mini-bar"><div class="mini-fill" style="width:33%"></div></div></td></tr>
+                  <tr><td class="type-code">ISTJ</td><td>物流师</td><td>1</td><td>8.3%</td><td class="bar-cell"><div class="mini-bar"><div class="mini-fill" style="width:33%"></div></div></td></tr>
+                  <tr><td class="type-code">ENTP</td><td>辩论家</td><td>1</td><td>8.3%</td><td class="bar-cell"><div class="mini-bar"><div class="mini-fill" style="width:33%"></div></div></td></tr>
+                </tbody>
+              </table>
+
+              <h3 class="section-subheading" style="margin-top:28px;">维度分布</h3>
+              <table class="dist-table">
+                <thead>
+                  <tr><th>维度</th><th>倾向</th><th>人数</th><th>占比</th><th class="bar-cell">分布</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>外向/内向</td><td class="type-code">E</td><td>4</td><td>33.3%</td><td class="bar-cell"><div class="mini-bar"><div class="mini-fill" style="width:33%"></div></div></td></tr>
+                  <tr><td>外向/内向</td><td class="type-code">I</td><td>8</td><td>66.7%</td><td class="bar-cell"><div class="mini-bar"><div class="mini-fill" style="width:67%"></div></div></td></tr>
+                  <tr><td>实感/直觉</td><td class="type-code">S</td><td>3</td><td>25.0%</td><td class="bar-cell"><div class="mini-bar"><div class="mini-fill" style="width:25%"></div></div></td></tr>
+                  <tr><td>实感/直觉</td><td class="type-code">N</td><td>9</td><td>75.0%</td><td class="bar-cell"><div class="mini-bar"><div class="mini-fill" style="width:75%"></div></div></td></tr>
+                  <tr><td>思考/情感</td><td class="type-code">T</td><td>5</td><td>41.7%</td><td class="bar-cell"><div class="mini-bar"><div class="mini-fill" style="width:42%"></div></div></td></tr>
+                  <tr><td>思考/情感</td><td class="type-code">F</td><td>7</td><td>58.3%</td><td class="bar-cell"><div class="mini-bar"><div class="mini-fill" style="width:58%"></div></div></td></tr>
+                  <tr><td>判断/感知</td><td class="type-code">J</td><td>5</td><td>41.7%</td><td class="bar-cell"><div class="mini-bar"><div class="mini-fill" style="width:42%"></div></div></td></tr>
+                  <tr><td>判断/感知</td><td class="type-code">P</td><td>7</td><td>58.3%</td><td class="bar-cell"><div class="mini-bar"><div class="mini-fill" style="width:58%"></div></div></td></tr>
+                </tbody>
+              </table>
+
+              <div style="text-align:center;margin-top:24px;">
+                <button class="btn btn-outline btn-sm" onclick="protoToast('数据已清空')">清空数据</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="proto-annotation proto-anno-analytics">
+          <div class="anno-tag">F10-F14 · 多人汇总</div>
+          <div class="anno-text">导入多人 JSON 文件后展示统计概览（总人数/类型数/最常见类型）、类型分布表（按人数降序+条形图）、维度分布表。支持清空数据。原型中展示 12 人的模拟数据。</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="phone-home-bar"></div>
+  </div>
+
+  <!-- ========== 底部功能标注栏 ========== -->
+  <div class="proto-bottom-bar">
+    <div class="bottom-section">
+      <div class="bottom-section-title">核心功能覆盖（PRD F1-F15）</div>
+      <div class="bottom-tags">
+        <span class="bottom-tag tag-p0">F1 测评问卷</span>
+        <span class="bottom-tag tag-p0">F2 计分引擎</span>
+        <span class="bottom-tag tag-p0">F3 答题导航</span>
+        <span class="bottom-tag tag-p0">F4 结果展示</span>
+        <span class="bottom-tag tag-p0">F5 报告内容</span>
+        <span class="bottom-tag tag-p1">F6 导出JSON</span>
+        <span class="bottom-tag tag-p1">F7 导出文本</span>
+        <span class="bottom-tag tag-p1">F8 导出图片</span>
+        <span class="bottom-tag tag-p1">F9 重新测评</span>
+        <span class="bottom-tag tag-p1">F10 文件导入</span>
+        <span class="bottom-tag tag-p1">F11 统计概览</span>
+        <span class="bottom-tag tag-p1">F12 类型分布</span>
+        <span class="bottom-tag tag-p1">F13 维度分布</span>
+        <span class="bottom-tag tag-p1">F14 清空数据</span>
+        <span class="bottom-tag tag-p0">F15 数据配置化</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="proto-toast" id="proto-toast"></div>
+
+  <script src="js/prototype.js"></script>
+</body>
+</html>
